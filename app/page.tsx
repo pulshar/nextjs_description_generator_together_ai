@@ -16,10 +16,10 @@ const languages = [
   { code: "fr", name: "French" },
   { code: "de", name: "German" },
   { code: "it", name: "Italian" },
+  { code: "pt", name: "Portuguese" },
   { code: "ja", name: "Japanese" },
   { code: "ko", name: "Korean" },
   { code: "zh", name: "Chinese" },
-  { code: "pt", name: "Portuguese" },
 ];
 
 const models = [
@@ -54,6 +54,7 @@ export default function Page() {
   const handleResetApp = () => {
     setImage(null);
     setDescriptions([]);
+    setStatus("idle");
   };
   const handleImageUpload = async (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -145,7 +146,7 @@ export default function Page() {
               >
                 {uploading ? (
                   <div className="flex flex-col items-center gap-2">
-                    <Spinner className="size-6" />
+                    <Spinner className="size-6 opacity-25" />
                     <span className="text-muted-foreground opacity-65">
                       Uploading image
                     </span>
@@ -211,7 +212,7 @@ export default function Page() {
                 ))}
               </ToggleGroup>
             </div>
-            <div className="xs:grid-cols-2 grid grid-cols-1 gap-4 px-2 py-7">
+            <div className="xs:grid-cols-[45%_auto] grid grid-cols-1 gap-4 px-2 py-7">
               <div>
                 <p className="text-sm font-bold">Languages</p>
                 <p className="mt-2 text-sm text-muted-foreground">
@@ -290,7 +291,9 @@ export default function Page() {
                 )}
               </Button>
             ) : (
-              <Button onClick={handleResetApp}>Reset app</Button>
+              <Button className="xs:w-auto w-full" onClick={handleResetApp}>
+                Try again
+              </Button>
             )}
           </div>
         </div>
