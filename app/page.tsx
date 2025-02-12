@@ -179,14 +179,14 @@ export default function Page() {
                   "https://res.cloudinary.com/dfcv0exad/image/upload/v1739276240/next-cloudinary-uploads/upload_1739276254940_product_hdt9bo.jpg",
                 )
               }
-              className="text-xs font-semibold text-brand hover:underline"
+              className="px-2 text-xs font-semibold text-brand hover:underline"
             >
               Use a sample image
             </button>
           </div>
 
           <div className="divide-y">
-            <div className="grid grid-cols-2 gap-4 py-7">
+            <div className="xs:grid-cols-2 grid grid-cols-1 gap-4 px-2 py-7">
               <div>
                 <p className="text-sm font-bold">Model</p>
                 <p className="mt-2 text-sm text-muted-foreground">
@@ -195,7 +195,7 @@ export default function Page() {
               </div>
               <ToggleGroup
                 type="single"
-                className="mx-auto flex flex-wrap justify-start gap-2"
+                className="xs:justify-end flex flex-wrap justify-start gap-2"
                 onValueChange={setModel}
                 value={model}
               >
@@ -211,7 +211,7 @@ export default function Page() {
                 ))}
               </ToggleGroup>
             </div>
-            <div className="grid grid-cols-2 gap-4 py-7">
+            <div className="xs:grid-cols-2 grid grid-cols-1 gap-4 px-2 py-7">
               <div>
                 <p className="text-sm font-bold">Languages</p>
                 <p className="mt-2 text-sm text-muted-foreground">
@@ -220,7 +220,7 @@ export default function Page() {
               </div>
               <ToggleGroup
                 type="multiple"
-                className="mx-auto flex flex-wrap justify-start gap-2"
+                className="xs:justify-end flex flex-wrap justify-start gap-2"
                 onValueChange={setSelectedLanguages}
               >
                 {languages.map((lang) => (
@@ -239,7 +239,7 @@ export default function Page() {
                 ))}
               </ToggleGroup>
             </div>
-            <div className="grid grid-cols-2 gap-4 py-7">
+            <div className="xs:grid-cols-2 grid grid-cols-1 gap-4 px-2 pt-7">
               <div>
                 <p className="text-sm font-bold">Length</p>
                 <p className="mt-2 text-sm text-muted-foreground">
@@ -248,7 +248,7 @@ export default function Page() {
               </div>
               <ToggleGroup
                 type="single"
-                className="mx-auto flex flex-wrap justify-start gap-2"
+                className="xs:justify-end flex flex-wrap justify-start gap-2"
                 onValueChange={setLength}
                 value={length}
               >
@@ -275,7 +275,7 @@ export default function Page() {
                   selectedLanguages.length === 0 ||
                   status === "loading"
                 }
-                className="relative"
+                className="xs:w-auto relative w-full"
               >
                 <span
                   className={status === "loading" ? "opacity-0" : "opacity-100"}
@@ -290,9 +290,7 @@ export default function Page() {
                 )}
               </Button>
             ) : (
-              <Button onClick={handleResetApp}>
-                Reset app
-              </Button>
+              <Button onClick={handleResetApp}>Reset app</Button>
             )}
           </div>
         </div>
