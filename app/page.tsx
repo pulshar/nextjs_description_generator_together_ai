@@ -121,14 +121,14 @@ export default function Page() {
         </p>
         <div>
           <div
-            className={`${image ? "border-transparent bg-transparent" : "transition-colors hover:border-brand"} my-4 flex aspect-[3] flex-col items-center justify-center rounded-md border-2 border-dashed bg-muted`}
+            className={`${image ? "border-transparent bg-transparent" : "transition-colors hover:border-brand"} my-4 flex aspect-[2/1] flex-col items-center justify-center rounded-md border-2 border-dashed bg-muted md:aspect-[2.5/1]`}
           >
             {image ? (
-              <div className="relative flex h-full max-h-full w-full items-center justify-center rounded-md border bg-muted p-3">
+              <div className="relative flex h-full w-full items-center justify-center overflow-hidden rounded-md border bg-muted">
                 <img
                   src={image}
                   alt="Uploaded product"
-                  className="h-full rounded-md"
+                  className="w-full object-cover"
                 />
                 <Button
                   variant="default"
@@ -187,7 +187,7 @@ export default function Page() {
           </div>
 
           <div className="divide-y">
-            <div className="xs:grid-cols-2 grid grid-cols-1 gap-4 px-2 py-7">
+            <div className="grid grid-cols-1 gap-4 px-2 py-7 xs:grid-cols-2">
               <div>
                 <p className="text-sm font-bold">Model</p>
                 <p className="mt-2 text-sm text-muted-foreground">
@@ -196,7 +196,7 @@ export default function Page() {
               </div>
               <ToggleGroup
                 type="single"
-                className="xs:justify-end flex flex-wrap justify-start gap-2"
+                className="flex flex-wrap justify-start gap-2 xs:justify-end"
                 onValueChange={setModel}
                 value={model}
               >
@@ -212,7 +212,7 @@ export default function Page() {
                 ))}
               </ToggleGroup>
             </div>
-            <div className="xs:grid-cols-[45%_auto] grid grid-cols-1 gap-4 px-2 py-7">
+            <div className="grid grid-cols-1 gap-4 px-2 py-7 xs:grid-cols-[45%_auto]">
               <div>
                 <p className="text-sm font-bold">Languages</p>
                 <p className="mt-2 text-sm text-muted-foreground">
@@ -221,7 +221,7 @@ export default function Page() {
               </div>
               <ToggleGroup
                 type="multiple"
-                className="xs:justify-end flex flex-wrap justify-start gap-2"
+                className="flex flex-wrap justify-start gap-2 xs:justify-end"
                 onValueChange={setSelectedLanguages}
               >
                 {languages.map((lang) => (
@@ -240,7 +240,7 @@ export default function Page() {
                 ))}
               </ToggleGroup>
             </div>
-            <div className="xs:grid-cols-2 grid grid-cols-1 gap-4 px-2 pt-7">
+            <div className="grid grid-cols-1 gap-4 px-2 pt-7 xs:grid-cols-2">
               <div>
                 <p className="text-sm font-bold">Length</p>
                 <p className="mt-2 text-sm text-muted-foreground">
@@ -249,7 +249,7 @@ export default function Page() {
               </div>
               <ToggleGroup
                 type="single"
-                className="xs:justify-end flex flex-wrap justify-start gap-2"
+                className="flex flex-wrap justify-start gap-2 xs:justify-end"
                 onValueChange={setLength}
                 value={length}
               >
@@ -276,7 +276,7 @@ export default function Page() {
                   selectedLanguages.length === 0 ||
                   status === "loading"
                 }
-                className="xs:w-auto relative w-full"
+                className="relative w-full xs:w-auto"
               >
                 <span
                   className={status === "loading" ? "opacity-0" : "opacity-100"}
@@ -291,7 +291,7 @@ export default function Page() {
                 )}
               </Button>
             ) : (
-              <Button className="xs:w-auto w-full" onClick={handleResetApp}>
+              <Button className="w-full xs:w-auto" onClick={handleResetApp}>
                 Try again
               </Button>
             )}
