@@ -10,8 +10,12 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ["var(--font-geist-sans)"],
+        mono: ["var(--font-geist-mono)"],
+      },
       screens: {
-        'xs': '560px',
+        xs: "560px",
       },
       borderRadius: {
         lg: "var(--radius)",
