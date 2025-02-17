@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import Footer from "./components/footer";
+import { ThemeProvider } from "./components/theme/ThemeProvider";
 import "./globals.css";
+import Header from "./components/Header";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -24,33 +27,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+    <html lang="en" suppressHydrationWarning>
+    <head />
+    <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <ThemeProvider
+        attribute="class"
+        defaultTheme="system"
+        enableSystem
+        disableTransitionOnChange
       >
-        {children}
-        <footer className="mx-auto max-w-6xl mb-12 px-8 text-center lg:text-left text-sm text-muted-foreground">
-          <p>
-            Powered by{" "}
-            <a
-              href="https://togetherai.link"
-              target="_blank"
-              className="underline underline-offset-2 transition hover:text-brand"
-            >
-              Together.ai
-            </a>{" "}
-            &{" "}
-            <a
-              href="https://togetherai.link"
-              target="_blank"
-              className="underline underline-offset-2 transition hover:text-brand"
-            >
-              Llama 3.2
-            </a>
-          </p>
-         
-        </footer>
-      </body>
-    </html>
+         <Header />
+        <main className="mx-auto max-w-6xl px-4">{children}</main>
+        <Footer/>
+      </ThemeProvider>
+    </body>
+  </html>
+
   );
 }
