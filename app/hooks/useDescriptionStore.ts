@@ -9,6 +9,9 @@ type DescriptionState = {
   selectedLanguages: string[];
   length: string;
   descriptions: Description[];
+};
+
+type DescriptionActions = {
   setImage: (image: string | null) => void;
   setModel: (model: string) => void;
   setSelectedLanguages: (selectedLanguages: string[]) => void;
@@ -17,51 +20,48 @@ type DescriptionState = {
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 };
 
-export const useDescriptionStore = create<DescriptionState>()((set) => ({
+const initialState: DescriptionState = {
   image: null,
   status: "idle",
   model: models[0].value,
   selectedLanguages: [],
   length: lengths[0].value,
   descriptions: [],
+};
 
-  setImage: (image) => set({ image }),
-  setModel: (model) => set({ model }),
-  setSelectedLanguages: (selectedLanguages: string[]) =>
-    set({ selectedLanguages }),
-  setLength: (length) => set({ length }),
+const useDescriptionStore = create<DescriptionState & DescriptionActions>()(
+  (set) => ({
+    ...initialState,
+    setImage: (image) => set({ image }),
+    setModel: (model) => set({ model }),
+    setSelectedLanguages: (selectedLanguages: string[]) =>
+      set({ selectedLanguages }),
+    setLength: (length) => set({ length }),
 
-  handleResetApp: () =>
-    set({
-      image: null,
-      status: "idle",
-      model: models[0].value,
-      selectedLanguages: [],
-      length: lengths[0].value,
-      descriptions: [],
-    }),
+    handleResetApp: () => set(initialState),
 
-  handleSubmit: async (e) => {
-    e.preventDefault();
-    const { image, selectedLanguages, length, model } =
-      useDescriptionStore.getState();
-    if (!image || selectedLanguages.length === 0) return;
-    set({ status: "loading" });
+    handleSubmit: async (e) => {
+      e.preventDefault();
+      const { image, selectedLanguages, length, model } =
+        useDescriptionStore.getState();
+      if (!image || selectedLanguages.length === 0) return;
+      set({ status: "loading" });
 
-    const response = await fetch("/api/generateDescriptions", {
-      method: "POST",
-      body: JSON.stringify({
-        languages: selectedLanguages,
-        imageUrl: image,
-        model,
-        length,
-      }),
-    });
+      const response = await fetch("/api/generateDescriptions", {
+        method: "POST",
+        body: JSON.stringify({
+          languages: selectedLanguages,
+          imageUrl: image,
+          model,
+          length,
+        }),
+      });
 
-    const descriptions = await response.json();
-    set({ descriptions: descriptions });
-    set({ status: "success" });
-  },
-}));
+      const descriptions = await response.json();
+      set({ descriptions: descriptions });
+      set({ status: "success" });
+    },
+  }),
+);
 
 export default useDescriptionStore;

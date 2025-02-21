@@ -12,8 +12,7 @@ export default function ImageUploader() {
   const [error, setError] = useState<string | null>(null);
 
   const image = useDescriptionStore((state) => state.image);
-
-  const { setImage } = useDescriptionStore();
+  const setImage = useDescriptionStore((state) => state.setImage);
 
   const handleImageUpload = useCallback(
     async (event: React.ChangeEvent<HTMLInputElement>) => {

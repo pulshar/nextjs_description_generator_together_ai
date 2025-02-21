@@ -5,7 +5,8 @@ import { languages } from "@/lib/constants";
 export default function LanguageSelector() {
 
     const  selectedLanguages  = useDescriptionStore((state) => (state.selectedLanguages));
-    const {setSelectedLanguages} = useDescriptionStore()
+    const  setSelectedLanguages  = useDescriptionStore((state) => (state.setSelectedLanguages));
+
   return (
     <div className="grid grid-cols-1 gap-4 px-2 py-7 xs:grid-cols-[45%_auto]">
       <div>

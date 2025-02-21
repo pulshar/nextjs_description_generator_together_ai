@@ -3,8 +3,8 @@ import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { models } from "@/lib/constants";
 
 export default function ModelSelector() {
-  const model  = useDescriptionStore((state) => (state.model));
-  const {setModel} = useDescriptionStore()
+  const model = useDescriptionStore((state) => state.model);
+  const setModel = useDescriptionStore((state) => state.setModel);
 
   return (
     <div className="grid grid-cols-1 gap-4 px-2 py-7 xs:grid-cols-2">
