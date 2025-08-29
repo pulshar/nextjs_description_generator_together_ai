@@ -1,17 +1,11 @@
-import { Button } from "@/components/ui/button";
-import { Github } from "lucide-react";
-import Link from "next/link";
 import { ThemeToggleButton } from "./theme/ThemeToggleButton";
-
 
 export default function Header() {
   return (
     <header className="text-sm font-medium">
-      <div className="mx-auto flex max-w-6xl items-center gap-4 px-4 py-4 justify-center lg:justify-end">
-        
-
-          <div className="flex items-center gap-2">
-            <Button
+      <div className="mx-auto flex max-w-6xl items-center justify-center gap-4 px-4 py-4 lg:justify-end">
+        <div className="flex items-center gap-2">
+          {/* <Button
               variant="ghost"
               size="icon"
               className="rounded-full"
@@ -21,10 +15,10 @@ export default function Header() {
                 <Github className="h-5 w-5" />
                 <span className="sr-only">Github link</span>
               </Link>
-            </Button>
+            </Button> */}
 
-            <ThemeToggleButton />
-          </div>
+          <ThemeToggleButton />
+        </div>
       </div>
     </header>
   );

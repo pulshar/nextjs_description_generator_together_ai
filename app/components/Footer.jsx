@@ -16,7 +16,8 @@ export default function Footer() {
           target="_blank"
           className="underline underline-offset-2 transition hover:text-brand"
         >
-          Llama 3.2
+          {/* Llama 3.2 */}
+          Arcee AI Spotlight
         </a>
       </p>
     </footer>

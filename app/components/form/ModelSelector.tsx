@@ -11,7 +11,8 @@ export default function ModelSelector() {
       <div>
         <p className="text-sm font-bold">Model</p>
         <p className="mt-2 text-sm text-muted-foreground">
-          Select the Llama 3.2 vision model you want to use.
+          {/* Select the Llama 3.2 vision model you want to use. */}
+          Currently using the Arcee AI Spotlight vision model as default.
         </p>
       </div>
       <ToggleGroup
@@ -25,6 +26,7 @@ export default function ModelSelector() {
             variant="outline"
             key={model.value}
             value={model.value}
+            disabled
             className="rounded-full text-xs font-medium shadow-none data-[state=on]:bg-foreground data-[state=on]:text-background"
           >
             {model.label}

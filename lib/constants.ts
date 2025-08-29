@@ -12,13 +12,17 @@ export const languages = [
 
 export const models = [
   {
-    value: "meta-llama/Llama-3.2-11B-Vision-Instruct-Turbo",
-    label: "Llama 3.2 11B",
+    value: "arcee_ai/arcee-spotlight",
+    label: "Arcee AI Spotlight",
   },
-  {
-    value: "meta-llama/Llama-3.2-90B-Vision-Instruct-Turbo",
-    label: "Llama 3.2 90B",
-  },
+  // {
+  //   value: "meta-llama/Llama-3.2-11B-Vision-Instruct-Turbo",
+  //   label: "Llama 3.2 11B",
+  // },
+  // {
+  //   value: "meta-llama/Llama-3.2-90B-Vision-Instruct-Turbo",
+  //   label: "Llama 3.2 90B",
+  // },
 ];
  
 export const lengths = [
