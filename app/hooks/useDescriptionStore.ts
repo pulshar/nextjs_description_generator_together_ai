@@ -9,6 +9,7 @@ type DescriptionState = {
   selectedLanguages: string[];
   length: string;
   descriptions: Description[];
+  error?: string | null;
 };
 
 type DescriptionActions = {
@@ -42,24 +43,52 @@ const useDescriptionStore = create<DescriptionState & DescriptionActions>()(
 
     handleSubmit: async (e) => {
       e.preventDefault();
+
       const { image, selectedLanguages, length, model } =
         useDescriptionStore.getState();
+      
       if (!image || selectedLanguages.length === 0) return;
-      set({ status: "loading" });
 
-      const response = await fetch("/api/generateDescriptions", {
-        method: "POST",
-        body: JSON.stringify({
-          languages: selectedLanguages,
-          imageUrl: image,
-          model,
-          length,
-        }),
-      });
+      set({ status: "loading", error: null });
 
-      const descriptions = await response.json();
-      set({ descriptions: descriptions });
-      set({ status: "success" });
+      try {
+        const response = await fetch("/api/generateDescriptions", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            languages: selectedLanguages,
+            imageUrl: image,
+            model,
+            length,
+          }),
+        });
+
+        // Error HTTP (4xx / 5xx)
+        if (!response.ok) {
+          const errorBody = await response.json().catch(() => null);
+          throw new Error(
+            errorBody?.message || `Service currently unavailable`,
+          );
+        }
+
+
+        const descriptions = await response.json();
+
+        set({
+          descriptions,
+          status: "success",
+        });
+      } catch (error) {
+        set({
+          status: "error",
+          error:
+            error instanceof Error
+              ? error.message
+              : "Unexpected error occurred",
+        });
+      }
     },
   }),
 );

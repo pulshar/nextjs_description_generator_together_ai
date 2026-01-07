@@ -1,4 +1,4 @@
-export type Status = "idle" | "loading" | "success";
+export type Status = "idle" | "loading" | "success" | "error";
 
 export type Description = {
   language: string;

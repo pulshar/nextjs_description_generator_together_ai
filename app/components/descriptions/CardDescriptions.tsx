@@ -4,9 +4,11 @@ import useDescriptionStore from "@/app/hooks/useDescriptionStore";
 import { Card } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { languages } from "@/lib/constants";
+import ErrorMsg from "./errorMsg/ErrorMsg";
 
 export default function CardDescriptions() {
   const status = useDescriptionStore((state) => state.status);
+  const error = useDescriptionStore((state) => state.error);
   const selectedLanguages = useDescriptionStore(
     (state) => state.selectedLanguages,
   );
@@ -20,9 +22,9 @@ export default function CardDescriptions() {
       </p>
     </div>
   ) : (
-    <Card className="mx-auto w-full max-w-xl p-6">
+    <Card className="relative mx-auto w-full max-w-xl p-6">
       <h3 className="text-xl font-semibold">Generated Descriptions</h3>
-      {status === "loading" ? (
+      {status === "loading" && (
         <div className="mt-6 space-y-10">
           {selectedLanguages.map((language) => (
             <div className="flex flex-col space-y-3" key={language}>
@@ -39,7 +41,8 @@ export default function CardDescriptions() {
             </div>
           ))}
         </div>
-      ) : (
+      )}
+      {status === "success" && (
         <div className="divide-y">
           {descriptions.map(({ language, description }) => (
             <div key={language} className="py-5">
@@ -53,6 +56,7 @@ export default function CardDescriptions() {
           ))}
         </div>
       )}
+      {status === "error" && error && <ErrorMsg message={error} />}
     </Card>
   );
 }
